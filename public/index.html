@@ -19,6 +19,13 @@
             box-sizing: border-box;
             border: 1px solid #ef00ff;
         }
+
+        .packman {
+            display: inline-block;
+            box-sizing: border-box;
+            background-color: yellow;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
@@ -61,6 +68,13 @@
             // ajoute la ligne au damier
             packPanel.appendChild(line);
         }
+
+        // le personnage packman
+        let packman = document.createElement('div');
+        packman.position = { line: 11, cell: 15 };
+        packman.style.width = (1.1 * cellSize) + 'px';
+        packman.style.height = (1.1 )
+
     </script>
 </body>
 </html>
