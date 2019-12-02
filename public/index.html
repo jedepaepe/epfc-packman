@@ -65,49 +65,98 @@
         // le packmanApp (le lien entre le HTML et le CSS)
         let packmanApp = document.getElementById('packman-app');
 
-        /*
-         * ----- packmanPanel - le damier
-         */
         // crée le damier
-        let packmanPanel = document.createElement('div');
-        // assigne la classe panel
-        packmanPanel.classList.add('panel');
+        let panel = createPanel(cellSize, nrCells, nrCells);
 
-        // boucle pour créer toutes les lignes
-        for (let i = 0; i < nrCells; ++i) {
+        // le personnage packman
+        let packman = createPackman(
+            packmanColumn * cellSize - (packmanSize - cellSize) / 2,
+            packmanLine * cellSize - (packmanSize - cellSize) / 2,
+            packmanSize
+        );
+        panel.appendChild(packman);
+
+        // ajoute le panel au div packmanApp
+        packmanApp.appendChild(panel);
+
+        /*
+         * ----- les fonctions -----
+         */
+
+        /**
+         * crée un damier
+         * @param {number} size est la taille des cellules en pixels
+         * @param {number} nrColumns est le nombre de colonnes
+         * @param {number} nrLines est le nombre de lignes
+         * @return {HTMLDivElement} le damier
+         */
+        function createPanel (size, nrColumns, nrLines) {
+            // crée le damier
+            let panel = document.createElement('div');
+            // assigne la classe panel
+            panel.classList.add('panel');
+
+            // boucle pour créer toutes les lignes
+            for (let i = 0; i < nrCells; ++i) {
+                // ajoute la ligne au damier
+                panel.appendChild(createLine(cellSize, nrCells));
+            }
+            return panel;
+        }
+
+        /**
+         * crée une ligne
+         * @param {number} size est la taille des cellules en pixels
+         * @param {number} nr est le nombre de cellule
+         * @return {HTMLDivElement} la ligne
+         */
+        function createLine (size, nr) {
             // crée le "div" représentant la ligne
             let line = document.createElement('div');
             // ajuste le style
-            line.style.width = (nrCells * cellSize) + 'px';
-            line.style.height = cellSize + 'px';
+            line.style.width = (nr * size) + 'px';
+            line.style.height = size + 'px';
 
             // boucle pour créer toutes les cellules de la ligne
             for (let j = 0; j < nrCells; ++j) {
-                // crée la cellule
-                let cell = document.createElement('div');
-                // applique la classe CSS "panel-cell" à la cellule
-                cell.classList.add('panel-cell');
-                // ajuste le style
-                cell.style.width = cellSize + 'px';
-                cell.style.height = cellSize + 'px';
                 // ajoute la cellule à la ligne
-                line.appendChild(cell);
+                line.appendChild(createCell(size));
             }
-            // ajoute la ligne au damier
-            packmanPanel.appendChild(line);
+
+            return line;
         }
 
-        // le personnage packman
-        let packman = document.createElement('div');
-        packman.classList.add('packman');
-        packman.style.width = packmanSize + 'px';
-        packman.style.height = packmanSize + 'px';
-        packman.style.left = (packmanColumn * cellSize - (packmanSize - cellSize) / 2) + 'px';
-        packman.style.top = (packmanLine * cellSize - (packmanSize - cellSize) / 2) + 'px';
-        packmanPanel.appendChild(packman);
+        /**
+         * crée une cellule
+         * @param {number} size est la taille de la cellule en pixel
+         * @return {HTMLDivElement} la cellule
+         */
+        function createCell (size) {
+            let cell = document.createElement('div');
+            // applique la classe CSS "panel-cell" à la cellule
+            cell.classList.add('panel-cell');
+            // ajuste le style
+            cell.style.width = size + 'px';
+            cell.style.height = size + 'px';
+            return cell;
+        }
 
-        // ajoute le packmanPanel au div packmanApp
-        packmanApp.appendChild(packmanPanel);
+        /**
+         * crée le personnage packman
+         * @param {number} x est l'absisse du sommet supérieur gauche de packman en pixel
+         * @param {number} y est la coordonnée du sommet supérieur gauche de packman en pixel
+         * @param {number} size est la taille de packman en pixel
+         * @return {HTMLDivElement} packman
+         */
+        function createPackman (x, y, size) {
+            let packman = document.createElement('div');
+            packman.classList.add('packman');
+            packman.style.width = size + 'px';
+            packman.style.height = size + 'px';
+            packman.style.left = x + 'px';
+            packman.style.top = y + 'px';
+            return packman;
+        }
     </script>
 </body>
 </html>
