@@ -1,0 +1,22 @@
+{
+  "name": "epfc-packman",
+  "version": "1.0.0",
+  "description": "exercice javascript - créer une application packman",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "dependencies": {
+    "express": "^4.15.2"
+  },
+  "keywords": [
+    "exercice",
+    "javascript",
+    "packman",
+    "node",
+    "browser",
+    "dom"
+  ],
+  "author": "jedepaepe@epfc.eu",
+  "license": "MIT"
+}

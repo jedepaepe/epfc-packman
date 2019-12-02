@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- packman -->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>packman</title>
+    <style>
+        .panel {
+            margin: 20px;
+            padding: 20px;
+            background-color: black;
+        }
+        .panel-line {
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .panel-cell {
+            display: inline-block;
+            box-sizing: border-box;
+            border: 1px solid #ef00ff;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="panel" id="pack-panel"></div>
+    </main>
+    <script>
+        let cellSize = 21
+        let nrCells = 29
+        let packPanel = document.getElementById('pack-panel')
+        for (let i = 0; i < nrCells; ++i) {
+            let line = document.createElement('div')
+            line.style.width = (nrCells * cellSize) + 'px'
+            line.style.height = cellSize + 'px'
+            line.classList.add('panel-line')
+            for (let j = 0; j < nrCells; ++j) {
+                let cell = document.createElement('div')
+                cell.classList.add('panel-cell')
+                cell.style.width = cellSize + 'px'
+                cell.style.height = cellSize + 'px'
+                line.appendChild(cell)
+            }
+            packPanel.appendChild(line)
+        }
+    </script>
+</body>
+</html>
