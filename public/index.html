@@ -18,11 +18,6 @@
             position: relative;
         }
 
-        .panel-line {
-            margin-right: auto;
-            margin-left: auto;
-        }
-
         .panel-cell {
             display: inline-block;
             box-sizing: border-box;
@@ -33,7 +28,6 @@
         .packman {
             position: absolute;
             display: inline-block;
-            box-sizing: border-box;
             background-color: yellow;
             border-radius: 50%;
         }
@@ -82,17 +76,11 @@
         let packmanPanel = document.createElement('div');
         // assigne la classe panel
         packmanPanel.classList.add('panel');
-        // assigne la largeur
-        packmanPanel.style.width = (nrCells * cellSize) + 'px';
-        // assigne la hauteur
-        packmanPanel.style.height = (nrCells * cellSize) + 'px';
 
         // boucle pour créer toutes les lignes
         for (let i = 0; i < nrCells; ++i) {
             // crée le "div" représentant la ligne
             let line = document.createElement('div');
-            // applique la classe CSS "panel-line" à la ligne
-            line.classList.add('panel-line');
             // ajuste le style
             line.style.width = (nrCells * cellSize) + 'px';
             line.style.height = cellSize + 'px';
