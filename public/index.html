@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- packman -->
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -27,22 +26,39 @@
         <div class="panel" id="pack-panel"></div>
     </main>
     <script>
-        let cellSize = 21
-        let nrCells = 29
-        let packPanel = document.getElementById('pack-panel')
+        // taille d'une cellule en pixels
+        let cellSize = 21;
+
+        // nombre de cellules par lignes et nombre de lignes
+        let nrCells = 29;
+
+        // le damier
+        let packPanel = document.getElementById('pack-panel');
+
+        // boucle pour créer toutes les lignes
         for (let i = 0; i < nrCells; ++i) {
-            let line = document.createElement('div')
-            line.style.width = (nrCells * cellSize) + 'px'
-            line.style.height = cellSize + 'px'
-            line.classList.add('panel-line')
+            // crée le "div" représentant la ligne
+            let line = document.createElement('div');
+            // applique la classe CSS "panel-line" à la ligne
+            line.classList.add('panel-line');
+            // ajuste le style
+            line.style.width = (nrCells * cellSize) + 'px';
+            line.style.height = cellSize + 'px';
+
+            // boucle pour créer toutes les cellules de la ligne
             for (let j = 0; j < nrCells; ++j) {
-                let cell = document.createElement('div')
-                cell.classList.add('panel-cell')
-                cell.style.width = cellSize + 'px'
-                cell.style.height = cellSize + 'px'
-                line.appendChild(cell)
+                // crée la cellule
+                let cell = document.createElement('div');
+                // applique la classe CSS "panel-cell" à la cellule
+                cell.classList.add('panel-cell');
+                // ajuste le style
+                cell.style.width = cellSize + 'px';
+                cell.style.height = cellSize + 'px';
+                // ajoute la cellule à la ligne
+                line.appendChild(cell);
             }
-            packPanel.appendChild(line)
+            // ajoute la ligne au damier
+            packPanel.appendChild(line);
         }
     </script>
 </body>
