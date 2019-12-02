@@ -5,36 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>packman</title>
     <style>
-        .panel {
-            margin: 20px;
-            padding: 20px;
+        .center {
+            text-align: center;
+        }
+
+        .packman-app {
+            display: inline-block;
             background-color: black;
         }
+
+        .panel {
+            position: relative;
+        }
+
         .panel-line {
             margin-right: auto;
             margin-left: auto;
         }
+
         .panel-cell {
             display: inline-block;
             box-sizing: border-box;
             border: 1px solid #ef00ff;
+            
+        }
+
+        .packman {
+            position: absolute;
+            display: inline-block;
+            box-sizing: border-box;
+            background-color: yellow;
+            border-radius: 50%;
         }
     </style>
 </head>
 <body>
-    <main>
-        <!-- ce div est le damier, les lignes et cellules seront construites par le javascript ci-dessous-->
-        <div class="panel" id="pack-panel"></div>
-    </main>
+    <div class="center">
+        <!-- ce div est le conteneur, le javascript va créer les éléments dans ce conteneur-->
+        <main id="packman-app" class="packman-app">
+        </main>    
+    </div>
     <script>
+        /*
+        ----- déclaration des paramètres -----
+         */
         // taille d'une cellule en pixels
         let cellSize = 21;
 
         // nombre de cellules par lignes et nombre de lignes
         let nrCells = 29;
 
-        // le damier
-        let packPanel = document.getElementById('pack-panel');
+        // taille de packman
+        let packmanSize = cellSize * 1.2;
+
+        // padding de l'application
+        let packmanAppPadding = 20;
+
+        // index of the line where packman is
+        let packmanLine = 11;
+
+        // index of the column where packman is (center of the panel)
+        let packmanColumn = Math.floor(nrCells / 2);
+
+        /*
+         * ----- packmanApp -----
+         */
+        // le packmanApp (le lien entre le HTML et le CSS)
+        let packmanApp = document.getElementById('packman-app');
+        // modifie le padding
+        packmanApp.style.padding = packmanAppPadding + 'px';
+
+        /*
+         * ----- packmanPanel - le damier
+         */
+        // crée le damier
+        let packmanPanel = document.createElement('div');
+        // assigne la classe panel
+        packmanPanel.classList.add('panel');
+        // assigne la largeur
+        packmanPanel.style.width = (nrCells * cellSize) + 'px';
+        // assigne la hauteur
+        packmanPanel.style.height = (nrCells * cellSize) + 'px';
 
         // boucle pour créer toutes les lignes
         for (let i = 0; i < nrCells; ++i) {
@@ -59,8 +110,20 @@
                 line.appendChild(cell);
             }
             // ajoute la ligne au damier
-            packPanel.appendChild(line);
+            packmanPanel.appendChild(line);
         }
+
+        // le personnage packman
+        let packman = document.createElement('div');
+        packman.classList.add('packman');
+        packman.style.width = packmanSize + 'px';
+        packman.style.height = packmanSize + 'px';
+        packman.style.left = (packmanColumn * cellSize - (packmanSize - cellSize) / 2) + 'px';
+        packman.style.top = (packmanLine * cellSize - (packmanSize - cellSize) / 2) + 'px';
+        packmanPanel.appendChild(packman);
+
+        // ajoute le packmanPanel au div packmanApp
+        packmanApp.appendChild(packmanPanel);
     </script>
 </body>
 </html>
