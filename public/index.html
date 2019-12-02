@@ -11,6 +11,7 @@
 
         .packman-app {
             display: inline-block;
+            padding: 20px;
             background-color: black;
         }
 
@@ -52,9 +53,6 @@
         // taille de packman
         let packmanSize = cellSize * 1.2;
 
-        // padding de l'application
-        let packmanAppPadding = 20;
-
         // index of the line where packman is
         let packmanLine = 11;
 
@@ -66,8 +64,6 @@
          */
         // le packmanApp (le lien entre le HTML et le CSS)
         let packmanApp = document.getElementById('packman-app');
-        // modifie le padding
-        packmanApp.style.padding = packmanAppPadding + 'px';
 
         /*
          * ----- packmanPanel - le damier
