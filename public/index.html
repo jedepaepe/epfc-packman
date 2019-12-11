@@ -11,7 +11,7 @@
         <div id="container"></div>
     </main>
     <script>
-        function packmanApp(nrRows = 25, nrColumns = 25, cellSize = 21) {
+        function packmanApp(nrRows = 25, nrColumns = 25, cellSize = 21, packmanSize = 17) {
             // récupère une référence sur le div de id "container"
             let container = document.getElementById('container');
             // le container doit adapter sa taille à son contenu
@@ -37,12 +37,33 @@
                 for (let c = 0; c < nrColumns; ++c) {
                     // crée un élément
                     let cell = document.createElement('div');
+                    // mettre en position relative (pour les éléments qui y seront placés)
+                    cell.style.position = 'relative';
                     // ajoute lui une bordure
                     cell.style.border = '1px solid purple';
                     // ajoute l'élément au panel
                     panel.appendChild(cell);
                 }
             }
+
+            // crée packman
+            let packman = document.createElement('div');
+            // position absolue (à partir de la cellule parente)
+            packman.style.position = 'absolute';
+            // largeur
+            packman.style.width = packmanSize + 'px';
+            // hauteur
+            packman.style.height = packman.style.width;
+            // couleur
+            packman.style.backgroundColor = 'yellow';
+            // distance par rapport au sommet (pour centrer packman)
+            packman.style.top = ((cellSize - 2 - packmanSize) / 2) + 'px';
+            // distance par rapport à la gauche (pour centre packman)
+            packman.style.left = packman.style.top;
+            // faire un cercle
+            packman.style.borderRadius = '50%';
+            // ajoute packman à la première cellule
+            panel.children[0].appendChild(packman);
 
             // ajoute le damier au container
             container.appendChild(panel);
