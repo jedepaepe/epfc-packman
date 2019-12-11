@@ -94,17 +94,40 @@
             packman.moveLeft = () => packman.move(0, -1);
             packman.moveRight = () => packman.move(0, 1);
 
-
             /**
+             * addition bornée, entre 0 (compris) et limit (non compris)
+             * @param a:number première opérante
+             * @param b:number seconde opérante
+             * @return (a + b) ramener au segment [0, limit] par translation
              */
-            function addInLimit(position, delta, limit) {
-                position = (position + delta) % limit;
-                if (position < 0) position += limit;
-                return position;
+            function addInLimit(a, b, limit) {
+                let c = (a + b) % limit;
+                if (c < 0) c += limit;
+                return c;
             }
 
             // ajoute le damier au container
             container.appendChild(panel);
+
+            // ajoute la mouvement de packman lorsque l'utilisateur enfonce les touches "arrows" (flèches)
+            document.body.onkeydown = (event) => {
+                switch (event.code) {
+                case 'ArrowUp':
+                    packman.moveUp();
+                    break;
+                case 'ArrowDown':
+                    packman.moveDown();
+                    break;
+                case 'ArrowLeft':
+                    packman.moveLeft();
+                    break;
+                case 'ArrowRight':
+                    packman.moveRight();
+                    break;
+                default:
+                    console.log('Pas traité: ' + event.keyCode);
+                }
+            }
 
             return {
                 move: (deltaRow, deltaColumn) => packman.move(deltaRow, deltaColumn),
