@@ -18,6 +18,7 @@
          * @param nrColumns:number est le nombre de colonnes
          * @param cellSize:number est la taille d'une cellule en pixels
          * @param packmanSize:number est la taille de packman en pixels
+         * @return a reference on the application "packman"
          */
         function packmanApp(anchor = 'container', nrRows = 25, nrColumns = 25, cellSize = 21, packmanSize = 17) {
             // récupère une référence sur le div de id "container"
@@ -72,12 +73,49 @@
             packman.style.borderRadius = '50%';
             // ajoute packman à la première cellule
             panel.children[0].appendChild(packman);
+            // mémoriser la ligne où se trouve packman
+            packman.row = 0;
+            // mémoriser la colonne où se trouve packman
+            packman.column = 0;
+            /**
+             * fonction qui fait bouger packman
+             * @param deltaRow:number est le déplacement en terme de nombre de lignes
+             * @param deltaColumn:number est le déplacement en terme de nombre de colonnes
+             */
+            packman.move = function (deltaRow = 1, deltaColumn = 1) {
+                this.row = addInLimit(this.row, deltaRow, nrRows);
+                this.column = addInLimit(this.column, deltaColumn, nrColumns);
+                let index = this.row * nrColumns + this.column;
+                panel.children[index].appendChild(this);
+            }
+            // simplified moves
+            packman.moveUp = () => packman.move(-1, 0);
+            packman.moveDown = () => packman.move(1, 0);
+            packman.moveLeft = () => packman.move(0, -1);
+            packman.moveRight = () => packman.move(0, 1);
+
+
+            /**
+             */
+            function addInLimit(position, delta, limit) {
+                position = (position + delta) % limit;
+                if (position < 0) position += limit;
+                return position;
+            }
 
             // ajoute le damier au container
             container.appendChild(panel);
+
+            return {
+                move: (deltaRow, deltaColumn) => packman.move(deltaRow, deltaColumn),
+                moveUp: () => packman.moveUp(),
+                moveDown: () => packman.moveDown(),
+                moveLeft: () => packman.moveLeft(),
+                moveRight: () => packman.moveRight()
+            }
         }
 
-        packmanApp();
+        let app = packmanApp(undefined, 8, 6);
     </script>
 </body>
 </html>
