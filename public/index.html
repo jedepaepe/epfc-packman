@@ -5,45 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>packman</title>
-    <style>
-        .panel {
-            margin: 20px;
-            padding: 20px;
-            background-color: black;
-        }
-        .panel-line {
-            margin-right: auto;
-            margin-left: auto;
-        }
-        .panel-cell {
-            display: inline-block;
-            box-sizing: border-box;
-            border: 1px solid #ef00ff;
-        }
-    </style>
 </head>
 <body>
     <main>
-        <div class="panel" id="pack-panel"></div>
+        <div id="container"></div>
     </main>
     <script>
-        let cellSize = 21
-        let nrCells = 29
-        let packPanel = document.getElementById('pack-panel')
-        for (let i = 0; i < nrCells; ++i) {
-            let line = document.createElement('div')
-            line.style.width = (nrCells * cellSize) + 'px'
-            line.style.height = cellSize + 'px'
-            line.classList.add('panel-line')
-            for (let j = 0; j < nrCells; ++j) {
-                let cell = document.createElement('div')
-                cell.classList.add('panel-cell')
-                cell.style.width = cellSize + 'px'
-                cell.style.height = cellSize + 'px'
-                line.appendChild(cell)
+        // récupère une référence sur le div de id "container"
+        let container = document.getElementById('container');
+        // le container doit adapter sa taille à son contenu
+        container.style.display = 'inline-block';
+
+        // le damier
+        let panel = document.createElement('div');
+        // grid layout
+        panel.style.display = 'grid';
+        // 25 lignes de 21px de hauteur
+        panel.style.gridTemplateRows = 'repeat(25, 21px)';
+        // 25 colonnes de 21px de largeur
+        panel.style.gridTemplateColumns = 'repeat(25, 21px)';
+        // un padding de 20px
+        panel.style.padding = '20px';
+        // couleur de fond noir
+        panel.style.backgroundColor = 'black';
+
+        // les cellules
+        // pour chacune des 25 lignes
+        for (let r = 0; r < 25; ++r) {
+            // pour chacune des 25 cellules de la ligne
+            for (let c = 0; c < 25; ++c) {
+                // crée un élément
+                let cell = document.createElement('div');
+                // ajoute lui une bordure
+                cell.style.border = '1px solid purple';
+                // ajoute l'élément au panel
+                panel.appendChild(cell);
             }
-            packPanel.appendChild(line)
         }
+
+        // ajoute le damier au container
+        container.appendChild(panel);
     </script>
 </body>
 </html>
