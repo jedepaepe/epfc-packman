@@ -11,9 +11,17 @@
         <div id="container"></div>
     </main>
     <script>
-        function packmanApp(nrRows = 25, nrColumns = 25, cellSize = 21, packmanSize = 17) {
+        /**
+         * crée l'application packman
+         * @param anchor:string est l'identifiant de l'élément où la fonction injecte l'application packman
+         * @param nrRows:number est le nombre de lignes
+         * @param nrColumns:number est le nombre de colonnes
+         * @param cellSize:number est la taille d'une cellule en pixels
+         * @param packmanSize:number est la taille de packman en pixels
+         */
+        function packmanApp(anchor = 'container', nrRows = 25, nrColumns = 25, cellSize = 21, packmanSize = 17) {
             // récupère une référence sur le div de id "container"
-            let container = document.getElementById('container');
+            let container = document.getElementById(anchor);
             // le container doit adapter sa taille à son contenu
             container.style.display = 'inline-block';
 
