@@ -11,48 +11,44 @@
         <div id="container"></div>
     </main>
     <script>
-        // paramètres
-        // nombre de lignes
-        let nrRows = 25;
-        // nombre de colonnes
-        let nrColumns = nrRows;
-        // taille de la cellule
-        let cellSize = 21;
+        function packmanApp(nrRows = 25, nrColumns = 25, cellSize = 21) {
+            // récupère une référence sur le div de id "container"
+            let container = document.getElementById('container');
+            // le container doit adapter sa taille à son contenu
+            container.style.display = 'inline-block';
 
-        // récupère une référence sur le div de id "container"
-        let container = document.getElementById('container');
-        // le container doit adapter sa taille à son contenu
-        container.style.display = 'inline-block';
+            // le damier
+            let panel = document.createElement('div');
+            // grid layout
+            panel.style.display = 'grid';
+            // 25 lignes de 21px de hauteur
+            panel.style.gridTemplateRows = `repeat(${nrRows}, ${cellSize}px)`;
+            // 25 colonnes de 21px de largeur
+            panel.style.gridTemplateColumns = `repeat(${nrColumns}, ${cellSize}px)`;
+            // un padding de 20px
+            panel.style.padding = '20px';
+            // couleur de fond noir
+            panel.style.backgroundColor = 'black';
 
-        // le damier
-        let panel = document.createElement('div');
-        // grid layout
-        panel.style.display = 'grid';
-        // 25 lignes de 21px de hauteur
-        panel.style.gridTemplateRows = `repeat(${nrRows}, ${cellSize}px)`;
-        // 25 colonnes de 21px de largeur
-        panel.style.gridTemplateColumns = `repeat(${nrColumns}, ${cellSize}px)`;
-        // un padding de 20px
-        panel.style.padding = '20px';
-        // couleur de fond noir
-        panel.style.backgroundColor = 'black';
-
-        // les cellules
-        // pour chacune des 25 lignes
-        for (let r = 0; r < nrRows; ++r) {
-            // pour chacune des 25 cellules de la ligne
-            for (let c = 0; c < nrColumns; ++c) {
-                // crée un élément
-                let cell = document.createElement('div');
-                // ajoute lui une bordure
-                cell.style.border = '1px solid purple';
-                // ajoute l'élément au panel
-                panel.appendChild(cell);
+            // les cellules
+            // pour chacune des 25 lignes
+            for (let r = 0; r < nrRows; ++r) {
+                // pour chacune des 25 cellules de la ligne
+                for (let c = 0; c < nrColumns; ++c) {
+                    // crée un élément
+                    let cell = document.createElement('div');
+                    // ajoute lui une bordure
+                    cell.style.border = '1px solid purple';
+                    // ajoute l'élément au panel
+                    panel.appendChild(cell);
+                }
             }
+
+            // ajoute le damier au container
+            container.appendChild(panel);
         }
 
-        // ajoute le damier au container
-        container.appendChild(panel);
+        packmanApp();
     </script>
 </body>
 </html>
